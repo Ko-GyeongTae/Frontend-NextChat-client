@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Image from 'next/image'
+import Link from 'next/link'
 import styles from '../../styles/Home.module.css'
 
 export default function Home() {
@@ -22,33 +23,33 @@ export default function Home() {
         </p>
 
         <div className={styles.grid}>
-          <a href="/chat/1" className={styles.card}>
-            <h2>1번방 &rarr;</h2>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
+          <Link href="/chat/1">
+            <a className={styles.card}>
+              <h2>1번방 &rarr;</h2>
+              <p>Find in-depth information about Next.js features and API.</p>
+            </a>
+          </Link>
 
-          <a href="/chat/2" className={styles.card}>
-            <h2>2번방 &rarr;</h2>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
+          <Link href="/chat/2">
+            <a className={styles.card}>
+              <h2>2번방 &rarr;</h2>
+              <p>Learn about Next.js in an interactive course with quizzes!</p>
+            </a>
+          </Link>
 
-          <a
-            href="/chat/3"
-            className={styles.card}
-          >
-            <h2>3번방 &rarr;</h2>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
+          <Link href="/chat/3">
+            <a className={styles.card}>
+              <h2>3번방 &rarr;</h2>
+              <p>Discover and deploy boilerplate example Next.js projects.</p>
+            </a>
+          </Link>
 
-          <a
-            href="/chat/root"
-            className={styles.card}
-          >
-            <h2>관리자 &rarr;</h2>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+          <Link href="/chat/root">
+            <a className={styles.card}>
+              <h2>관리자 &rarr;</h2>
+              <p>Instantly deploy your Next.js site to a public URL with Vercel.</p>
+            </a>
+          </Link>
         </div>
       </main>
 

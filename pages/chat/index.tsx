@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Image from 'next/image'
+import Link from 'next/link'
 import styles from '../../styles/Home.module.css'
 
 export default function Home() {
@@ -21,11 +22,11 @@ export default function Home() {
           <code className={styles.code}>pages/index.js</code>
         </p>
 
-        <a href='/chat/room'>
+        <Link href='/chat/room' passHref>
             <div>
                 <h1>Go to rooms</h1>
             </div>
-        </a>
+        </Link>
 
         
       </main>

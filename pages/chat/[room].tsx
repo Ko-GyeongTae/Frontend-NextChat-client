@@ -1,12 +1,39 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react';
 import styles from '../../styles/Home.module.css'
+import { io } from "socket.io-client";
+
+const socket = io('http://localhost:5021/chat');
 
 export default function Home() {
   const router = useRouter();
   const { room } = router.query;
-  console.log(router);
+
+  interface MsgRes {
+    time: string;
+    msg: string;
+    senderID: string;
+  }
+
+  const onSubmit = (data: { msg: string }) => {
+    const req = {
+      msg: data.msg,
+      userID: '1',
+    };
+    console.log(req);
+    socket.emit('msgToServer', req);
+    //reset();
+  };
+  
+  const [messages, setMessages] = useState<MsgRes[]>([]);
+  
+  useEffect(() => {
+      socket.on('msgToClient', (res: MsgRes) => {
+        setMessages(prev => [...prev, res]);
+      });
+  }, []);
   return (
     <div className={styles.container}>
       <Head>
@@ -20,7 +47,9 @@ export default function Home() {
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>
 
+      <button onClick={() => onSubmit({msg: 'hello'})}>
         <h2>Room {room}</h2>
+      </button>
       </main>
 
       <footer className={styles.footer}>
