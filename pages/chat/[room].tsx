@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import * as uuid from 'uuid';
+import styles from './room.module.css'
 
 import io from 'socket.io-client';
 
@@ -34,8 +35,12 @@ const Home: React.FC = () => {
     }
 
     socket.on('msgToClient', (message: Payload) => {
+      console.log(message);
       receivedMessage(message);
     });
+    socket.on('news', (msg: string) => {
+      alert(msg);
+    })
   }, [messages, name, text]);
 
   function validateInput() {
@@ -48,15 +53,16 @@ const Home: React.FC = () => {
         name,
         text,
       };
-      console.log(message);
+
       socket.emit('msgToServer', message);
+      console.log(message);
       setText('');
     }
   }
 
   return (
-    <div>
-      <div>
+    <div className={styles.container}>
+      <div className={styles.content}>
         <h1>{title}</h1>
         <input
           type="text"
@@ -64,12 +70,14 @@ const Home: React.FC = () => {
           onChange={e => setName(e.target.value)}
           placeholder="Enter name..."
         />
-        <div>
+        <div className={styles.card}>
+
+
           <ul>
             {messages.map(message => {
               if (message.name === name) {
                 return (
-                  <div key={message.id}>
+                  <div className={styles.mymessage} key={message.id}>
                     <span>
                       {message.name}
                       {' diz:'}
@@ -81,7 +89,7 @@ const Home: React.FC = () => {
               }
 
               return (
-                <div key={message.id}>
+                <div className={styles.othermessage} key={message.id}>
                   <span>
                     {message.name}
                     {' diz:'}
